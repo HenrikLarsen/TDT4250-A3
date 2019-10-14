@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: org.w3c.xhtml1;singleton:=true
+Export-Package: org.w3c.xhtml1,org.w3c.xhtml1.impl,org.w3c.xhtml1.util
+Bundle-Name: Ecore implementation of xhtml1
+Bundle-Version: 0.1.0.201608181320
+Bundle-ClassPath: .
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,org.eclipse
+ .emf.ecore.xmi;visibility:=reexport
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: no.hal
+

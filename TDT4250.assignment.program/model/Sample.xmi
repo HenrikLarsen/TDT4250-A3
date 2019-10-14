@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TDT4250.assignment.program:Program
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:TDT4250.assignment.program="https://TDT4250/assignment/program"
+    xsi:schemaLocation="https://TDT4250/assignment/program program.ecore"
+    name="Datateknologi"
+    code="MIDT"
+    year="2.0">
+  <specializations
+      name="Programvareutvikling"
+      code="232">
+    <semesters
+        code="1">
+      <semesterCourses>
+        <courses
+            name="Intro til AI"
+            code="TDT4136"
+            credit="7.5"/>
+      </semesterCourses>
+      <semesterCourses>
+        <courses
+            name="Informasjonssystemer"
+            code="TDT4175"
+            credit="8.0"/>
+      </semesterCourses>
+      <semesterCourses
+          status="ELECTIVE">
+        <courses
+            name="Design av grafiske brukergrensesnitt"
+            code="IT3402"
+            credit="7.5"/>
+      </semesterCourses>
+      <semesterCourses
+          status="ELECTIVE">
+        <courses
+            name="Avansert programvaredesign&#xA;"
+            code="TDT4250"
+            credit="7.5"/>
+      </semesterCourses>
+    </semesters>
+  </specializations>
+</TDT4250.assignment.program:Program>
