@@ -40,4 +40,4 @@ Sample.xmi
 
 Generated HTML
 ------
-![Imgur Image](https://i.imgur.com/r0ukTNU.png)
+![Imgur Image](https://i.imgur.com/evy8A0B.png)
