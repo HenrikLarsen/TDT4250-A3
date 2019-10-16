@@ -3,8 +3,8 @@ Third assignment in TDT4250 Advanced Software Design
 
 Model To Model (M2M) transformation of Ecore model to HTML using xHTML1.
 
-Ecore project (model): TDT4250.assignment.program
-Transformation project: TDT4250.assignment.hmtl
+* Ecore project (model): TDT4250.assignment.program
+* Transformation project: TDT4250.assignment.hmtl
 
 Constraints
 ------
