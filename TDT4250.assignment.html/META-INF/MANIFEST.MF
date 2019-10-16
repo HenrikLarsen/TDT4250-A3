@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Html
+Bundle-SymbolicName: TDT4250.assignment.html
+Bundle-Version: 1.0.0.qualifier
+Automatic-Module-Name: TDT4250.assignment.html
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ org.w3c.xhtml1;bundle-version="0.1.0",
+ TDT4250.assignment.program;bundle-version="0.1.0"
+Export-Package: .
+ 

@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import Program.impl.ProgramPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -56,7 +57,7 @@ public interface ProgramPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ProgramPackage eINSTANCE = Program.impl.ProgramPackageImpl.init();
+	ProgramPackage eINSTANCE = ProgramPackageImpl.init();
 
 	/**
 	 * The meta object id for the '{@link Program.impl.ProgramImpl <em>Program</em>}' class.

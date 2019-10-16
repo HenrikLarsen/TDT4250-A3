@@ -2,7 +2,12 @@
  */
 package Program;
 
+
+
 import org.eclipse.emf.ecore.EFactory;
+import Program.impl.ProgramFactoryImpl;
+
+
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +24,7 @@ public interface ProgramFactory extends EFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	ProgramFactory eINSTANCE = Program.impl.ProgramFactoryImpl.init();
+	ProgramFactory eINSTANCE = ProgramFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Program</em>'.
