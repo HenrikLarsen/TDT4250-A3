@@ -129,7 +129,7 @@ class Program2XhtmlGenerator {
 	def dispatch Iterable<? extends EObject> generate(Semester semester) {
 		#[
 			createHrType,
-			createH4Type => [ it += "Semester: " + semester.code + " " + semester.status ],
+			createH4Type => [ it += semester.name + " " + semester.status.toString() ],
 			createTableType => [
 					tr += #[ 
 						createTrType => [ 

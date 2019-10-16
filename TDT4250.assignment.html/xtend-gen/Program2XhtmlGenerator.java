@@ -3,7 +3,6 @@ import Program.Program;
 import Program.ProgramPackage;
 import Program.Semester;
 import Program.SemesterCourse;
-import Program.SemesterStatus;
 import Program.Specialization;
 import Program.util.ProgramResourceFactoryImpl;
 import com.google.common.collect.Iterables;
@@ -213,12 +212,11 @@ public class Program2XhtmlGenerator {
     HrType _createHrType = this.xhtml1Factory.createHrType();
     H4Type _createH4Type = this.xhtml1Factory.createH4Type();
     final Procedure1<H4Type> _function = (H4Type it) -> {
-      String _code = semester.getCode();
-      String _plus = ("Semester: " + _code);
-      String _plus_1 = (_plus + " ");
-      SemesterStatus _status = semester.getStatus();
-      String _plus_2 = (_plus_1 + _status);
-      this.xhtmlUtil.operator_add(it, _plus_2);
+      String _name = semester.getName();
+      String _plus = (_name + " ");
+      String _string = semester.getStatus().toString();
+      String _plus_1 = (_plus + _string);
+      this.xhtmlUtil.operator_add(it, _plus_1);
     };
     H4Type _doubleArrow = ObjectExtensions.<H4Type>operator_doubleArrow(_createH4Type, _function);
     TableType _createTableType = this.xhtml1Factory.createTableType();
