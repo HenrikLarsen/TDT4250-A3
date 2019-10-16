@@ -21,9 +21,8 @@ Model structure
 ------
 Department with courses and programs (study plans). A program includes multiple semesters and courses with optional specializations (single or multiple). A courses included in a semester can be mandatory or elective.
 
-![Imgur Image](https://imgur.com/9H9FvDd)
+![Imgur Image](https://i.imgur.com/9H9FvDd.png)
 
-![Imgur Image](https://i.imgur.com/aJZGIE8.png)
 
 Improvements from assignment 1
 ------
@@ -37,8 +36,8 @@ Based on feedback, the following model improvements have been done:
 
 Sample.xmi
 ------
-![Imgur Image](https://imgur.com/PpvA2Re)
+![Imgur Image](https://i.imgur.com/PpvA2Re.png)
 
 Generated HTML
 ------
-![Imgur Image](https://imgur.com/r0ukTNU)
+![Imgur Image](https://i.imgur.com/r0ukTNU.png)
