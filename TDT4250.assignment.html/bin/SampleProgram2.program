@@ -30,11 +30,13 @@
         <semesterCourses
             course="//@courses.4"/>
         <semesterCourses
+        	status="ELECTIVE"
             course="//@courses.5"/>
         <semesterCourses
             status="ELECTIVE"
             course="//@courses.6"/>
         <semesterCourses
+        	status="ELECTIVE"
             course="//@courses.7"/>
       </semesters>
     </specializations>

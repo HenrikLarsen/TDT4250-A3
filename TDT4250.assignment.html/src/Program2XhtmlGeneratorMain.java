@@ -15,9 +15,16 @@ public class Program2XhtmlGeneratorMain {
 	public static void main(String[] args) throws IOException {
 		Department department = (args.length > 0 ? getDepartment(args[0]) : getSampleDepartment());
 		String html = new Program2XhtmlGenerator().generateHtml(department);
-		URI target = URI.createURI("file:///Users/henriklarsen/eclipse-workspace/Assignment3/TDT4250.assignment.html/src/IDI.html");
-		try (PrintStream ps = new PrintStream(department.eResource().getResourceSet().getURIConverter().createOutputStream(target))) {
-			ps.print(html);
+		if (args.length > 1) {
+			URI target = URI.createURI(args[1]);
+			try (PrintStream ps = new PrintStream(department.eResource().getResourceSet().getURIConverter().createOutputStream(target))) {
+				ps.print(html);
+			}
+		} else {
+			URI target = URI.createURI("file:///Users/henriklarsen/eclipse-workspace/Assignment3/TDT4250.assignment.html/src/IDI.html");
+			try (PrintStream ps = new PrintStream(department.eResource().getResourceSet().getURIConverter().createOutputStream(target))) {
+				ps.print(html);
+			}
 		}
 		System.out.println(html);
 		
@@ -38,7 +45,7 @@ public class Program2XhtmlGeneratorMain {
 
 	public static Department getSampleDepartment() {
 		try {
-			return getDepartment(Program2XhtmlGeneratorMain.class.getResource("SampleProgram.program").toString());
+			return getDepartment(Program2XhtmlGeneratorMain.class.getResource("SampleProgram2.program").toString());
 		} catch (IOException e) {
 			System.err.println(e);
 			return null;

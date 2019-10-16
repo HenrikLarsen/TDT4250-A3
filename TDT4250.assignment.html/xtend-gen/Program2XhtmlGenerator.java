@@ -6,6 +6,7 @@ import Program.SemesterCourse;
 import Program.SemesterStatus;
 import Program.Specialization;
 import Program.util.ProgramResourceFactoryImpl;
+import com.google.common.collect.Iterables;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -20,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -35,7 +37,12 @@ import org.w3c.xhtml1.HrType;
 import org.w3c.xhtml1.HtmlType;
 import org.w3c.xhtml1.MetaType;
 import org.w3c.xhtml1.PType;
+import org.w3c.xhtml1.StyleType;
+import org.w3c.xhtml1.TableType;
+import org.w3c.xhtml1.TdType;
+import org.w3c.xhtml1.ThType;
 import org.w3c.xhtml1.TitleType;
+import org.w3c.xhtml1.TrType;
 import org.w3c.xhtml1.Xhtml1Factory;
 import org.w3c.xhtml1.util.Xhtml1ResourceFactoryImpl;
 
@@ -106,6 +113,21 @@ public class Program2XhtmlGenerator {
           };
           MetaType _doubleArrow_1 = ObjectExtensions.<MetaType>operator_doubleArrow(_createMetaType, _function_3);
           _meta.add(_doubleArrow_1);
+          EList<StyleType> _style = it_1.getStyle();
+          StyleType _createStyleType = this.xhtml1Factory.createStyleType();
+          final Procedure1<StyleType> _function_4 = (StyleType it_2) -> {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("table, th, td {");
+            _builder.newLine();
+            _builder.append("  ");
+            _builder.append("border: 1px solid black;");
+            _builder.newLine();
+            _builder.append("}");
+            _builder.newLine();
+            this.xhtmlUtil.operator_add(it_2, _builder);
+          };
+          StyleType _doubleArrow_2 = ObjectExtensions.<StyleType>operator_doubleArrow(_createStyleType, _function_4);
+          _style.add(_doubleArrow_2);
         };
         HeadType _doubleArrow = ObjectExtensions.<HeadType>operator_doubleArrow(_createHeadType, _function_1);
         it.setHead(_doubleArrow);
@@ -127,30 +149,45 @@ public class Program2XhtmlGenerator {
   }
   
   protected Iterable<? extends EObject> _generate(final Program program) {
-    HrType _createHrType = this.xhtml1Factory.createHrType();
-    H2Type _createH2Type = this.xhtml1Factory.createH2Type();
-    final Procedure1<H2Type> _function = (H2Type it) -> {
-      String _name = program.getName();
-      String _plus = (_name + " ");
-      float _year = program.getYear();
-      String _plus_1 = (_plus + Float.valueOf(_year));
-      String _plus_2 = (_plus_1 + " year");
-      this.xhtmlUtil.operator_add(it, _plus_2);
-    };
-    H2Type _doubleArrow = ObjectExtensions.<H2Type>operator_doubleArrow(_createH2Type, _function);
     DivType _createDivType = this.xhtml1Factory.createDivType();
-    final Procedure1<DivType> _function_1 = (DivType it) -> {
+    final Procedure1<DivType> _function = (DivType it) -> {
       it.setId(program.getName());
+      HrType _createHrType = this.xhtml1Factory.createHrType();
+      H2Type _createH2Type = this.xhtml1Factory.createH2Type();
+      final Procedure1<H2Type> _function_1 = (H2Type it_1) -> {
+        String _name = program.getName();
+        String _plus = (_name + " ");
+        float _year = program.getYear();
+        String _plus_1 = (_plus + Float.valueOf(_year));
+        String _plus_2 = (_plus_1 + " year");
+        this.xhtmlUtil.operator_add(it_1, _plus_2);
+      };
+      H2Type _doubleArrow = ObjectExtensions.<H2Type>operator_doubleArrow(_createH2Type, _function_1);
+      this.xhtmlUtil.operator_add(it, Collections.<EObject>unmodifiableList(CollectionLiterals.<EObject>newArrayList(_createHrType, _doubleArrow)));
       EList<Specialization> _specializations = program.getSpecializations();
       for (final Specialization spec : _specializations) {
         Iterable<? extends EObject> _generate = this.generate(spec);
         this.xhtmlUtil.operator_add(it, _generate);
       }
     };
-    DivType _doubleArrow_1 = ObjectExtensions.<DivType>operator_doubleArrow(_createDivType, _function_1);
-    return Collections.<EObject>unmodifiableList(CollectionLiterals.<EObject>newArrayList(_createHrType, _doubleArrow, _doubleArrow_1));
+    DivType _doubleArrow = ObjectExtensions.<DivType>operator_doubleArrow(_createDivType, _function);
+    return Collections.<EObject>unmodifiableList(CollectionLiterals.<EObject>newArrayList(_doubleArrow));
   }
   
+  /**
+   * def dispatch Iterable<? extends EObject> generate(Specialization spec) {
+   * #[
+   * createHrType,
+   * createH3Type => [ it += spec.name ],
+   * createDivType => [
+   * id = spec.name
+   * for (semester : spec.semesters) {
+   * it += generate(semester)
+   * }
+   * ]
+   * ]
+   * }
+   */
   protected Iterable<? extends EObject> _generate(final Specialization spec) {
     HrType _createHrType = this.xhtml1Factory.createHrType();
     H3Type _createH3Type = this.xhtml1Factory.createH3Type();
@@ -184,17 +221,77 @@ public class Program2XhtmlGenerator {
       this.xhtmlUtil.operator_add(it, _plus_2);
     };
     H4Type _doubleArrow = ObjectExtensions.<H4Type>operator_doubleArrow(_createH4Type, _function);
-    DivType _createDivType = this.xhtml1Factory.createDivType();
-    final Procedure1<DivType> _function_1 = (DivType it) -> {
-      it.setId(semester.getCode());
+    TableType _createTableType = this.xhtml1Factory.createTableType();
+    final Procedure1<TableType> _function_1 = (TableType it) -> {
+      EList<TrType> _tr = it.getTr();
+      TrType _createTrType = this.xhtml1Factory.createTrType();
+      final Procedure1<TrType> _function_2 = (TrType it_1) -> {
+        ThType _createThType = this.xhtml1Factory.createThType();
+        final Procedure1<ThType> _function_3 = (ThType it_2) -> {
+          this.xhtmlUtil.operator_add(it_2, "Code");
+        };
+        ThType _doubleArrow_1 = ObjectExtensions.<ThType>operator_doubleArrow(_createThType, _function_3);
+        ThType _createThType_1 = this.xhtml1Factory.createThType();
+        final Procedure1<ThType> _function_4 = (ThType it_2) -> {
+          this.xhtmlUtil.operator_add(it_2, "Name");
+        };
+        ThType _doubleArrow_2 = ObjectExtensions.<ThType>operator_doubleArrow(_createThType_1, _function_4);
+        ThType _createThType_2 = this.xhtml1Factory.createThType();
+        final Procedure1<ThType> _function_5 = (ThType it_2) -> {
+          this.xhtmlUtil.operator_add(it_2, "Credit");
+        };
+        ThType _doubleArrow_3 = ObjectExtensions.<ThType>operator_doubleArrow(_createThType_2, _function_5);
+        ThType _createThType_3 = this.xhtml1Factory.createThType();
+        final Procedure1<ThType> _function_6 = (ThType it_2) -> {
+          this.xhtmlUtil.operator_add(it_2, "Status");
+        };
+        ThType _doubleArrow_4 = ObjectExtensions.<ThType>operator_doubleArrow(_createThType_3, _function_6);
+        this.xhtmlUtil.operator_add(it_1, Collections.<EObject>unmodifiableList(CollectionLiterals.<EObject>newArrayList(_doubleArrow_1, _doubleArrow_2, _doubleArrow_3, _doubleArrow_4)));
+      };
+      TrType _doubleArrow_1 = ObjectExtensions.<TrType>operator_doubleArrow(_createTrType, _function_2);
+      Iterables.<TrType>addAll(_tr, Collections.<TrType>unmodifiableList(CollectionLiterals.<TrType>newArrayList(_doubleArrow_1)));
       EList<SemesterCourse> _semesterCourses = semester.getSemesterCourses();
       for (final SemesterCourse course : _semesterCourses) {
-        Iterable<? extends EObject> _generate = this.generate(course);
-        this.xhtmlUtil.operator_add(it, _generate);
+        EList<TrType> _tr_1 = it.getTr();
+        Iterable<? extends TrType> _generateTablecontent = this.generateTablecontent(course);
+        Iterables.<TrType>addAll(_tr_1, _generateTablecontent);
       }
     };
-    DivType _doubleArrow_1 = ObjectExtensions.<DivType>operator_doubleArrow(_createDivType, _function_1);
+    TableType _doubleArrow_1 = ObjectExtensions.<TableType>operator_doubleArrow(_createTableType, _function_1);
     return Collections.<EObject>unmodifiableList(CollectionLiterals.<EObject>newArrayList(_createHrType, _doubleArrow, _doubleArrow_1));
+  }
+  
+  protected Iterable<? extends TrType> _generateTablecontent(final SemesterCourse sc) {
+    TrType _createTrType = this.xhtml1Factory.createTrType();
+    final Procedure1<TrType> _function = (TrType it) -> {
+      TdType _createTdType = this.xhtml1Factory.createTdType();
+      final Procedure1<TdType> _function_1 = (TdType it_1) -> {
+        String _code = sc.getCourse().getCode();
+        this.xhtmlUtil.operator_add(it_1, _code);
+      };
+      TdType _doubleArrow = ObjectExtensions.<TdType>operator_doubleArrow(_createTdType, _function_1);
+      TdType _createTdType_1 = this.xhtml1Factory.createTdType();
+      final Procedure1<TdType> _function_2 = (TdType it_1) -> {
+        String _name = sc.getCourse().getName();
+        this.xhtmlUtil.operator_add(it_1, _name);
+      };
+      TdType _doubleArrow_1 = ObjectExtensions.<TdType>operator_doubleArrow(_createTdType_1, _function_2);
+      TdType _createTdType_2 = this.xhtml1Factory.createTdType();
+      final Procedure1<TdType> _function_3 = (TdType it_1) -> {
+        String _string = Float.valueOf(sc.getCourse().getCredit()).toString();
+        this.xhtmlUtil.operator_add(it_1, _string);
+      };
+      TdType _doubleArrow_2 = ObjectExtensions.<TdType>operator_doubleArrow(_createTdType_2, _function_3);
+      TdType _createTdType_3 = this.xhtml1Factory.createTdType();
+      final Procedure1<TdType> _function_4 = (TdType it_1) -> {
+        String _string = sc.getStatus().toString();
+        this.xhtmlUtil.operator_add(it_1, _string);
+      };
+      TdType _doubleArrow_3 = ObjectExtensions.<TdType>operator_doubleArrow(_createTdType_3, _function_4);
+      this.xhtmlUtil.operator_add(it, Collections.<EObject>unmodifiableList(CollectionLiterals.<EObject>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2, _doubleArrow_3)));
+    };
+    TrType _doubleArrow = ObjectExtensions.<TrType>operator_doubleArrow(_createTrType, _function);
+    return Collections.<TrType>unmodifiableList(CollectionLiterals.<TrType>newArrayList(_doubleArrow));
   }
   
   protected Iterable<? extends EObject> _generate(final SemesterCourse sc) {
@@ -271,7 +368,7 @@ public class Program2XhtmlGenerator {
   
   public static Department getSampleDepartment() {
     try {
-      return Program2XhtmlGenerator.getDepartment(Program2XhtmlGeneratorMain.class.getResource("SampleProgram.program").toString());
+      return Program2XhtmlGenerator.getDepartment(Program2XhtmlGeneratorMain.class.getResource("SampleProgram2.program").toString());
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException e = (IOException)_t;
@@ -296,5 +393,9 @@ public class Program2XhtmlGenerator {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(program).toString());
     }
+  }
+  
+  public Iterable<? extends TrType> generateTablecontent(final SemesterCourse sc) {
+    return _generateTablecontent(sc);
   }
 }
