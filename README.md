@@ -23,6 +23,8 @@ Department with courses and programs (study plans). A program includes multiple 
 
 ![Imgur Image](https://imgur.com/9H9FvDd)
 
+![Imgur Image](https://i.imgur.com/aJZGIE8.png)
+
 Improvements from assignment 1
 ------
 Based on feedback, the following model improvements have been done:
