@@ -221,7 +221,7 @@ class Program2XhtmlGenerator {
 
 	def static Department getSampleDepartment() {
 		try {
-			return getDepartment(Program2XhtmlGeneratorMain.getResource("SampleProgram2.program").toString());
+			return getDepartment(Program2XhtmlGeneratorMain.getResource("SampleProgram3.program").toString());
 		} catch (IOException e) {
 			System.err.println(e);
 			return null;

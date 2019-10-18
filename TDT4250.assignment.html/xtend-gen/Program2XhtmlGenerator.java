@@ -366,7 +366,7 @@ public class Program2XhtmlGenerator {
   
   public static Department getSampleDepartment() {
     try {
-      return Program2XhtmlGenerator.getDepartment(Program2XhtmlGeneratorMain.class.getResource("SampleProgram2.program").toString());
+      return Program2XhtmlGenerator.getDepartment(Program2XhtmlGeneratorMain.class.getResource("SampleProgram3.program").toString());
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
         final IOException e = (IOException)_t;

@@ -45,7 +45,7 @@ public class Program2XhtmlGeneratorMain {
 
 	public static Department getSampleDepartment() {
 		try {
-			return getDepartment(Program2XhtmlGeneratorMain.class.getResource("SampleProgram2.program").toString());
+			return getDepartment(Program2XhtmlGeneratorMain.class.getResource("SampleProgram3.program").toString());
 		} catch (IOException e) {
 			System.err.println(e);
 			return null;
